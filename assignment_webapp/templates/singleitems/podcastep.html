@@ -1,0 +1,37 @@
+{% include 'top.html' %}
+<div class="content">
+    <div class="container details">
+        <!-- TODO Query (7)
+        Display All Relevant Podcast Episode Infromation including meta data
+        -->
+        {% if podcastep %}
+            <h2 class="title"> {{podcastep[0].podcast_episode_title}} </h2>
+            <hr/>
+            {% for instance in podcastep %}
+                {% if instance.md_type_name == 'artwork' %}
+                    <img src="{{instance.md_value}}" alt="image" style="max-width:480px">
+                    <br/>© Spotify Public Domain 2019.
+                {% endif %}
+            {% endfor %}
+            <h3> Descriptions </h3>
+            {% for instance in podcastep %}
+                {% if instance.md_type_name == 'description' %}
+                    <div>
+                        {{instance.md_value}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <p>Episode ID: {{podcastep[0].podcast_episode_id}}</p>
+            <p>Episode URI: {{podcastep[0].podcast_episode_uri}}</p>
+            <p>Published Date: {{podcastep[0].podcast_episode_published_date}}</p>
+            <p>Length: {{podcastep[0].podcast_episode_length}}</p>
+
+        
+            
+        {% else %}
+            <h2 class="title"> Invalid PODCAST ID</h2>
+        {% endif %}
+        
+    </div>
+</div>
+{% include 'bottom.html'%}
